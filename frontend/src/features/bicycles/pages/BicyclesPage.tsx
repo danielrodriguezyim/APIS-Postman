@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import Button from '../../../components/ui/Button'
 import BicycleList from '../components/BicycleList'
 import BicycleModal from '../components/BicycleModal'
+import BicycleDeleteModal from '../components/BicycleDeleteModal'
 import { useBicycles } from '../hooks/useBicycles'
 import type { Bicycle, BicyclePayload } from '../types/bicycle'
 
@@ -10,6 +11,7 @@ function BicyclesPage() {
     const [modalOpen, setModalOpen] = useState(false)
     const [selectedBicycle, setSelectedBicycle] = useState<Bicycle | null>(null)
     const [deleting, setDeleting] = useState(false)
+    const [bicycleToDelete, setBicycleToDelete] = useState<Bicycle | null>(null)
     const deletingRef = useRef(false)
 
     function openModal(bicycle: Bicycle | null) {
@@ -23,14 +25,13 @@ function BicyclesPage() {
         setModalOpen(false)
     }
 
-    async function handleDelete(id: number) {
-        if (deletingRef.current) return
-        const bicycle = bicycles.find((item) => item.id === id)
-        if (!bicycle || !window.confirm(`¿Eliminar la bicicleta ${bicycle.brand} ${bicycle.model}?`)) return
+    async function handleDelete() {
+        if (deletingRef.current || !bicycleToDelete) return
         deletingRef.current = true
         setDeleting(true)
         try {
-            await deleteBicycle(id)
+            await deleteBicycle(bicycleToDelete.id)
+            setBicycleToDelete(null)
         } finally {
             deletingRef.current = false
             setDeleting(false)
@@ -54,7 +55,6 @@ function BicyclesPage() {
                     </Button>
                 </div>
             )}
-            {deleting && <p role="status">Eliminando bicicleta...</p>}
 
             {loading ? (
                 <p role="status">Cargando bicicletas...</p>
@@ -66,10 +66,18 @@ function BicyclesPage() {
                         const bicycle = bicycles.find((item) => item.id === id)
                         if (bicycle) openModal(bicycle)
                     }}
-                    onDelete={deleting ? undefined : (id) => void handleDelete(id)} />
+                    onDelete={deleting ? undefined : (id) => {
+                        const bicycle = bicycles.find((item) => item.id === id)
+                        if (bicycle) {
+                            setError(null)
+                            setBicycleToDelete(bicycle)
+                        }
+                    }} />
             )}
             {modalOpen && <BicycleModal bicycle={selectedBicycle} onSave={handleSave}
                 onClose={() => setModalOpen(false)} />}
+            {bicycleToDelete && <BicycleDeleteModal bicycle={bicycleToDelete} deleting={deleting}
+                onConfirm={() => void handleDelete()} onClose={() => setBicycleToDelete(null)} />}
         </main>
     )
 }

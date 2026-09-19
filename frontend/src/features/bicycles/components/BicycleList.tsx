@@ -13,11 +13,11 @@ function BicycleList({ bicycles, onEdit, onDelete}: BicycleListProps) {
             <table className="w-full border-collapse">
                 <thead className="bg-gray-800 text-white">
                     <tr>
-                        <th className="p-3 text-left">Brand</th>
-                        <th className="p-3 text-left">Model</th>
-                        <th className="p-3 text-left">Price</th>
-                        <th className="p-3 text-left">Stock</th>
-                        {(onEdit || onDelete) && <th className="p-3 text-left">Actions</th>}
+                        <th className="p-3 text-left">Marca</th>
+                        <th className="p-3 text-left">Modelo</th>
+                        <th className="p-3 text-left">Precio</th>
+                        <th className="p-3 text-left">Existencias</th>
+                        {(onEdit || onDelete) && <th className="p-3 text-left">Acciones</th>}
                     </tr>
                 </thead>
                 <tbody>

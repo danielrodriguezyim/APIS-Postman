@@ -39,7 +39,7 @@ function BicycleForm({ bicycle, onSave, onCancel, onSavingChange }: BicycleFormP
         if (!payload.brand || !payload.model || !values.price.trim() || !values.stock.trim()
             || !Number.isFinite(payload.price) || payload.price < 0 || payload.price > 99999999.99
             || !Number.isInteger(payload.stock) || payload.stock < 0 || payload.stock > 4294967295) {
-            setError('Revisa la marca, el modelo, el precio y el stock.')
+            setError('Revisa la marca, el modelo, el precio y las existencias.')
             return
         }
 

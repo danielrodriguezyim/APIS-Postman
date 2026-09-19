@@ -21,7 +21,7 @@ function Modal({
                 </div>
                 <div className="bg-gray-100 px-6 py-4 rounded-b-lg">
                     <Button variant="secondary" onClick={onClose}>
-                        Close
+                        Cerrar
                     </Button>
                 </div>
             </div>

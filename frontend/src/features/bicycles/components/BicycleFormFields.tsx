@@ -42,7 +42,7 @@ function BicycleFormFields({ values, onChange, disabled }: BicycleFormFieldsProp
                     onChange={(event) => onChange('price', event.target.value)} />
             </label>
             <label className="block">
-                Stock
+                Existencias
                 <input name="stock" type="number" required min="0" max="4294967295" step="1"
                     className={inputClass} value={values.stock}
                     onChange={(event) => onChange('stock', event.target.value)} />
