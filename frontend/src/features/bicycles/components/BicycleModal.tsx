@@ -21,7 +21,7 @@ function BicycleModal({ bicycle, onSave, onClose }: BicycleModalProps) {
 
     return (
         <dialog ref={dialogRef} aria-labelledby={titleId}
-            className="fixed inset-0 m-auto max-h-[90vh] w-full max-w-md overflow-y-auto rounded-lg bg-white p-6 shadow-xl backdrop:bg-black/50"
+            className="fixed inset-0 m-auto max-h-[90vh] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-lg bg-white p-6 shadow-xl backdrop:bg-black/50"
             onCancel={(event) => {
                 event.preventDefault()
                 if (!saving) onClose()

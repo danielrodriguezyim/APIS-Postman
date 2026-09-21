@@ -9,25 +9,23 @@ interface BicycleListProps {
 
 function BicycleList({ bicycles, onEdit, onDelete}: BicycleListProps) {
     return (
-        <div className="overflow-x-auto rounded-lg bg-white shadow">
-            <table className="w-full border-collapse">
-                <thead className="bg-gray-800 text-white">
-                    <tr>
-                        <th className="p-3 text-left">Marca</th>
-                        <th className="p-3 text-left">Modelo</th>
-                        <th className="p-3 text-left">Precio</th>
-                        <th className="p-3 text-left">Existencias</th>
-                        {(onEdit || onDelete) && <th className="p-3 text-left">Acciones</th>}
-                    </tr>
-                </thead>
-                <tbody>
-                    {bicycles.map((bicycle) => (
-                        <BicycleRow key={bicycle.id} bicycle={bicycle} 
-                                    onEdit={onEdit} onDelete={onDelete}
-                        />
-                    ))}
-                </tbody>
-            </table>
+        <div className="lg:overflow-hidden lg:rounded-lg lg:bg-white lg:shadow">
+            <div aria-hidden="true"
+                className={`hidden gap-4 bg-gray-800 p-4 font-semibold text-white lg:grid ${
+                    onEdit || onDelete ? 'lg:grid-cols-5' : 'lg:grid-cols-4'
+                }`}>
+                <span>Marca</span>
+                <span>Modelo</span>
+                <span>Precio</span>
+                <span>Existencias</span>
+                {(onEdit || onDelete) && <span>Acciones</span>}
+            </div>
+            <ul aria-label="Listado de bicicletas" className="grid min-w-0 gap-4 lg:gap-0">
+                {bicycles.map((bicycle) => (
+                    <BicycleRow key={bicycle.id} bicycle={bicycle}
+                        onEdit={onEdit} onDelete={onDelete} />
+                ))}
+            </ul>
         </div>
     )
 }

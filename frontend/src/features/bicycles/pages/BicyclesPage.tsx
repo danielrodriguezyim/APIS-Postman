@@ -39,9 +39,9 @@ function BicyclesPage() {
     }
 
     return (
-        <main className="mx-auto max-w-6xl p-6">
-            <div className="mb-6 flex items-center justify-between gap-4">
-                <h1 className="text-3xl font-bold">Bicicletas</h1>
+        <main className="mx-auto max-w-6xl p-4 sm:p-6">
+            <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <h1 className="text-3xl font-bold">Listado de Bicicletas</h1>
                 <Button onClick={() => openModal(null)} disabled={loading || deleting}
                     className="rounded px-4 py-2 disabled:opacity-50">Nueva bicicleta</Button>
             </div>
