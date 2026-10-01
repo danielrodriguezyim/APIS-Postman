@@ -1,3 +1,4 @@
+import { BicycleDetail } from "../bicycle-details/bicycle-detail.model";
 import { Brand } from "../brands/brand.model";
 import { Bicycle } from "./bicycle.model";
 
@@ -9,18 +10,32 @@ export class BicycleService {
     });
   }
 
+  static async findAllEagerlyByFrameMaterial(frameMaterial: string) {
+    return Bicycle.findAll({
+      include: [
+        {
+          model: BicycleDetail,
+          as: 'detail',
+          where: {
+            frameMaterial
+          }
+        }
+      ],
+      order: [["id", "ASC"]],
+    });
+  }
 
   static async findById(id: number) {
     return Bicycle.findByPk(id);
   }
 
-    static async findEagerlyById(id: number) {
+  static async findEagerlyById(id: number) {
     return Bicycle.findByPk(id, {
       include: [
-        { 
-        model: Brand,
-        as: 'brand',
-       }
+        {
+          model: Brand,
+          as: 'brand',
+        }
       ],
     });
   }

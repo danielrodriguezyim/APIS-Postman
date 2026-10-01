@@ -39,9 +39,7 @@ BicycleDetail.init(
         bicycleID: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false,
-            references: { model: "bicycles", key: "id" },
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE",
+            unique: true,
         },
         frameMaterial: {
             type: DataTypes.ENUM("Aluminum", "Carbon", "Steel", "Titanium"),

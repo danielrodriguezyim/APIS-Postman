@@ -1,19 +1,28 @@
 import { BicycleDetail } from "../bicycle-details/bicycle-detail.model";
 import { Bicycle } from "../bicycles/bicycle.model";
 
+const includeBicycle = {
+    model: Bicycle,
+    as: "bicycle",
+    attributes: ["id", "model"],
+};
+
 export class BicycleDetailService {
     static async findAll() {
         return BicycleDetail.findAll({
             order: [["id", "ASC"]],
+            include: [includeBicycle],
         });
     }
 
     static async findById(id: number) {
-        return BicycleDetail.findByPk(id);
+        return BicycleDetail.findByPk(id, {
+            include: [includeBicycle],
+        });
     }
 
     static async create(data: {
-        bicycleId: number;
+        bicycleID: number;
         frameMaterial: "Aluminum" | "Carbon" | "Steel" | "Titanium";
         wheelSize: number;
         weight: number;
@@ -25,7 +34,7 @@ export class BicycleDetailService {
     static async update(
         bicycleDetail: BicycleDetail,
         data: {
-            bicycleId?: number;
+            bicycleID?: number;
             frameMaterial?: "Aluminum" | "Carbon" | "Steel" | "Titanium";
             wheelSize?: number;
             weight?: number;

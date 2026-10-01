@@ -1,32 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { BicycleDetailService } from "./bicycle-detail.service";
 
-export class BicycleController {
-
-  static async getEagerlyById(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) {
-    try {
-      const id = Number(req.params.id);
-
-      const bicycleDetail = await BicycleDetailService.findEagerlyById(id);
-
-      if (!bicycleDetail) {
-        res.status(404).json({
-          message: "Detalle de bicicleta no encontrado",
-        });
-        
-        return;
-      }
-
-      res.json(bicycleDetail);
-
-    } catch (error) {
-      next(error);
-    }
-  }
+export class BicycleDetailController {
 
   static async getAll(
     req: Request,
@@ -75,9 +50,9 @@ export class BicycleController {
     next: NextFunction
   ) {
     try {
-      const { bicycleId, frameMaterial, wheelSize, weight, suspension } = req.body;
+      const { bicycleID, frameMaterial, wheelSize, weight, suspension } = req.body;
 
-      if (!bicycleId || !frameMaterial || !wheelSize || !weight) {
+      if (!bicycleID || !frameMaterial || !wheelSize || !weight) {
         res.status(400).json({
           message: "brand, model y price son obligatorios",
         });
@@ -86,7 +61,7 @@ export class BicycleController {
       }
 
       const bicycleDetail = await BicycleDetailService.create({
-        bicycleId,
+        bicycleID,
         frameMaterial,
         wheelSize,
         weight,
