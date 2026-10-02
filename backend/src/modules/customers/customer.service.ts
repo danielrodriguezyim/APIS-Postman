@@ -1,4 +1,6 @@
+import { Order } from "../orders/order.model";
 import { Customer } from "./customer.model";
+import { Op } from "sequelize";
 
 export class CustomerService {
 
@@ -12,6 +14,20 @@ export class CustomerService {
         return Customer.findByPk(id);
     }
 
+    static async findCustomerWithOrdersSearchByName(nameSearch: string) {
+        return Customer.findAll({
+            where: {
+                name: { [Op.like]: `%${nameSearch}%` }
+            },
+            include: [
+                {
+                    model: Order,
+                    as: 'orders',
+                    required: true,
+                }
+            ]
+        });
+    }
 
     static async create(data: {
         name: string;

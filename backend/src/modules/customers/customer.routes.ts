@@ -5,6 +5,8 @@ const router = Router();
 
 router.get("/", CustomerController.getAll);
 
+router.get("/:name_search/orders", CustomerController.getCustomerWithOrdersSearchByName);
+
 router.get("/:id", CustomerController.getById);
 
 router.post("/", CustomerController.create);

@@ -3,26 +3,16 @@ import { OrderService } from "./order.service";
 
 export class OrderController {
 
-  static async getEagerlyById(
+  static async getByCustomerId(
     req: Request,
     res: Response,
     next: NextFunction
   ) {
     try {
-      const id = Number(req.params.id);
+      const customerID = Number(req.params.id);
+      const orders = await OrderService.findByCustomerId(customerID);
 
-      const order = await OrderService.findEagerlyById(id);
-
-      if (!order) {
-        res.status(404).json({
-          message: "Pedido no encontrado",
-        });
-        
-        return;
-      }
-
-      res.json(order);
-
+      res.json(orders);
     } catch (error) {
       next(error);
     }

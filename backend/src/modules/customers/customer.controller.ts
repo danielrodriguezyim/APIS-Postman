@@ -17,6 +17,20 @@ export class CustomerController {
     }
   }
 
+  static async getCustomerWithOrdersSearchByName(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const nameSearch = String(req.params.name_search);
+      const customers = await CustomerService.findCustomerWithOrdersSearchByName(nameSearch);
+
+      res.json(customers);
+    } catch (error) {
+      next(error);
+    }
+  }
 
   static async getById(
     req: Request,

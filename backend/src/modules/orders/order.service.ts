@@ -13,14 +13,16 @@ export class OrderService {
     return Order.findByPk(id);
   }
 
-  static async findEagerlyById(id: number) {
-    return Order.findByPk(id, {
+  static async findByCustomerId(customerID: number) {
+    return Order.findAll({
+      where: { customerID },
       include: [
         {
           model: Customer,
-          as: 'customer',
+          as: 'customer', attributes: ['id', 'name', 'email'],
         }
       ],
+      order: [["orderDate", "DESC"]],
     });
   }
 
