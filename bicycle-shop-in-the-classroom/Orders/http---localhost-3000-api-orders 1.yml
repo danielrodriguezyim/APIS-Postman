@@ -1,14 +1,18 @@
 info:
-  name: http://localhost:3000/api/brands_1
+  name: http://localhost:3000/api/orders
   type: http
   seq: 2
 
 http:
   method: POST
-  url: http://localhost:3000/api/brands
+  url: http://localhost:3000/api/orders
   body:
     type: json
-    data: "{\r\n    \"name\": \"Gitane\"\r\n}"
+    data: |-
+      {
+        "customerID": 1,
+        "status": "pending"
+      }
   auth: inherit
 
 settings:

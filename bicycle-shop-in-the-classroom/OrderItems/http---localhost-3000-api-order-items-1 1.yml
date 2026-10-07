@@ -1,14 +1,14 @@
 info:
-  name: http://localhost:3000/api/brands/2_1
+  name: http://localhost:3000/api/order-items/1
   type: http
-  seq: 4
+  seq: 3
 
 http:
-  method: DELETE
-  url: http://localhost:3000/api/brands/1
+  method: PUT
+  url: http://localhost:3000/api/order-items/1
   body:
     type: json
-    data: ""
+    data: "{\r\n    \"name\": \"Orbea\"\r\n}"
   auth: inherit
 
 settings:

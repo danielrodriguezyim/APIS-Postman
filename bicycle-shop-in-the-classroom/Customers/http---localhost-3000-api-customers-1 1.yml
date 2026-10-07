@@ -1,14 +1,14 @@
 info:
-  name: http://localhost:3000/api/customers_1
+  name: http://localhost:3000/api/customers/1
   type: http
-  seq: 2
+  seq: 4
 
 http:
-  method: POST
-  url: http://localhost:3000/api/customers
+  method: DELETE
+  url: http://localhost:3000/api/customers/1
   body:
     type: json
-    data: "{\r\n    \"name\": \"Gitane\"\r\n}"
+    data: ""
   auth: inherit
 
 settings:
