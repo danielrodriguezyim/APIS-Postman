@@ -17,7 +17,6 @@ export class OrderItemController {
     }
   }
 
-
   static async getById(
     req: Request,
     res: Response,
@@ -43,6 +42,44 @@ export class OrderItemController {
     }
   }
 
+  static async getAllEagerly(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const orderItems = await OrderItemService.findAllEagerly();
+
+      res.json(orderItems);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getEagerlyById(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const id = Number(req.params.id);
+
+      const orderItem = await OrderItemService.findEagerlyById(id);
+
+      if (!orderItem) {
+        res.status(404).json({
+          message: "Item de pedido no encontrado",
+        });
+
+        return;
+      }
+
+      res.json(orderItem);
+
+    } catch (error) {
+      next(error);
+    }
+  }
 
   static async create(
     req: Request,

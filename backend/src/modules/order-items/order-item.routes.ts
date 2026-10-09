@@ -5,6 +5,10 @@ const router = Router();
 
 router.get("/", OrderItemController.getAll);
 
+router.get("/eagerly", OrderItemController.getAllEagerly);
+
+router.get("/eagerly/:id", OrderItemController.getEagerlyById);
+
 router.get("/:id", OrderItemController.getById);
 
 router.post("/", OrderItemController.create);
